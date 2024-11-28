@@ -2,6 +2,9 @@
 __pycache__/
 *.pyc
 
+# Database files
+*.db
+
 # Virtual environment
 .venv/
 
