@@ -10,3 +10,7 @@ __pycache__/
 
 # VS Code workspace settings
 *code-workspace
+
+# Session-related files
+cookie_signature.txt
+flask_session/
