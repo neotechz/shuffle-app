@@ -8,4 +8,13 @@
     <form action="/new" method="get">
         <button type="submit">New Deck</button>
     </form>
+
+    <ul>
+    {% for deck in decks %}
+
+    <li>{{ deck }}</li>
+
+    {% endfor %}
+    </ul>
+
 {% endblock %}

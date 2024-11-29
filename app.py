@@ -103,7 +103,8 @@ def index():
     if not session.get("setup_done"):
         return redirect("/setup")
 
-    return render_template("index.html")
+    decks = [deck.name for deck in session_db.query(Deck).filter_by(user_id = session.get("id"))]
+    return render_template("index.html", decks = decks)
 
 
 @app.route("/new")
