@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Deck: {{ deck_name }}
+{% endblock %}
+
+{% block main %}
+    <form action = "/" method = "get">
+        <button type = "submit">Go back to Main Menu</button>
+    </form>
+
+    <ul>
+    {% for card in cards %}
+
+    <li>{{ card.front }}</li>
+    <li>{{ card.back }}</li>
+
+    {% endfor %}
+    </ul>
+
+{% endblock %}

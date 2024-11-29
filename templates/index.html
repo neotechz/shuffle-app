@@ -5,16 +5,17 @@
 {% endblock %}
 
 {% block main %}
-    <form action="/new" method="get">
-        <button type="submit">New Deck</button>
+    <form action = "/new" method="get">
+        <button type = "submit">Create new deck</button>
     </form>
 
-    <ul>
     {% for deck in decks %}
 
-    <li>{{ deck }}</li>
+    <form action = "/deck/{{ deck.id }}" method = "post">
+        <button type = "submit">View: {{ deck.name }}</button>
+        <input type = "hidden" name = "deck_name" value = "{{ deck.name }}">
+    </form>
 
     {% endfor %}
-    </ul>
 
 {% endblock %}

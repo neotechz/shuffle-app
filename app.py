@@ -98,25 +98,34 @@ def setup():
     return redirect("/")
 
 
-@app.route("/")
+@app.route("/", methods = ["GET"])
 def index():
     if not session.get("setup_done"):
         return redirect("/setup")
 
-    decks = [deck.name for deck in session_db.query(Deck).filter_by(user_id = session.get("id"))]
+    decks = session_db.query(Deck).filter_by(user_id = session.get("id")).all()
+
     return render_template("index.html", decks = decks)
 
 
-@app.route("/new")
+@app.route("/new", methods = ["GET"])
 def create_deck():
     new_deck = Deck(user_id = session.get("id"), datetime_now = get_datetime())
-    new_card = Card(deck_id = new_deck.id)
-
     session_db.add(new_deck)
+    session_db.flush()
+
+    new_card = Card(deck_id = new_deck.id)
     session_db.add(new_card)
     session_db.commit()
 
     return redirect("/")
+
+@app.route("/deck/<string:deck_id>", methods = ["POST"])
+def show_deck(deck_id):
+    cards = session_db.query(Card).filter_by(deck_id = deck_id).all()
+    deck_name = request.form["deck_name"]
+
+    return render_template("deck.html", cards = cards, deck_name = deck_name)
 
 
 # APP LAUNCH & RELATED METHODS
