@@ -5,8 +5,13 @@
 {% endblock %}
 
 {% block main %}
+
     <form action = "/" method = "get">
         <button type = "submit">Go back to Main Menu</button>
+    </form>
+
+    <form>
+        <input type = "text" placeholder = "{{ deck.name }}" value = "{{ deck.name }}" id = "{{ deck.id }}">
     </form>
 
     <ul>
@@ -17,5 +22,11 @@
 
     {% endfor %}
     </ul>
+
+    <script>
+        deck = document.getElementById("{{ deck.id }}");
+        deck.addEventListener("focusout", function(event){
+            update_deck(event.currentTarget);})
+    </script>
 
 {% endblock %}

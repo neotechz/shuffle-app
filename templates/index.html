@@ -13,6 +13,7 @@
 
     <form action = "/deck/{{ deck.id }}" method = "post">
         <button type = "submit">View: {{ deck.name }}</button>
+        <input type = "hidden" name = "deck_id" value = "{{ deck.id }}">
         <input type = "hidden" name = "deck_name" value = "{{ deck.name }}">
     </form>
 

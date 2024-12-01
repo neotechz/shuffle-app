@@ -124,9 +124,28 @@ def create_deck():
 @app.route("/deck/<string:deck_id>", methods = ["POST"])
 def show_deck(deck_id):
     cards = session_db.query(Card).filter_by(deck_id = deck_id).all()
-    deck_name = request.form["deck_name"]
+    deck = {
+        "id": request.form["deck_id"],
+        "name": request.form["deck_name"]
 
-    return render_template("deck.html", cards = cards, deck_name = deck_name)
+    } 
+
+    return render_template("deck.html", cards = cards, deck = deck)
+
+
+@app.route("/deck/rename", methods = ["POST"])
+def rename_deck():
+    data = request.get_json()
+    deck_id = data.get("id")
+    deck_name = data.get("name")
+
+    print(data)
+
+    deck = session_db.query(Deck).filter_by(id = deck_id).first()
+    deck.name = deck_name
+    session_db.commit()
+
+    return jsonify({"success": True, "name": deck_name})
 
 
 # APP LAUNCH & RELATED METHODS
