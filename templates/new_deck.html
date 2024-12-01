@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+    <form action = "/deck/{{ deck.id }}" method = "post" id = "new_deck">
+        <input type = "hidden" name = "deck_name" value = "{{ deck.name }}">
+    </form>
+
+    <script>
+        document.getElementById("new_deck").submit()
+    </script>
+
+
+{% endblock %}
