@@ -1,19 +1,19 @@
-let update_deck = function(deck){
-    fetch("/deck/rename", {
+let update_input = function(input, type){
+    fetch(`/${type}/rename`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            id: deck.id,
-            name: deck.value
+            id: input.id,
+            name: input.value
 
         })
     }).then(response => response.json())
     .then(data => {
         if(data["success"]){
-            deck.value = data["name"]
-            deck.placeholder = data["name"]
+            input.value = data["name"]
+            input.placeholder = data["name"]
         }
     });
 }
