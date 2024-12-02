@@ -10,8 +10,8 @@
         <button type = "submit">Go back to Main Menu</button>
     </form>
 
-    <form>
-        <input type = "text" placeholder = "{{ deck.name }}" value = "{{ deck.name }}" id = "{{ deck.id }}">
+    <form class = "deck" id = "{{ deck.id }}">
+        <input type = "text" placeholder = "{{ deck.name }}" value = "{{ deck.name }}" class = "name">
     </form>
 
     <ol>
@@ -28,20 +28,20 @@
     </ol>
 
     <script>
-        let deck = document.getElementById("{{ deck.id }}");
-        deck.addEventListener("focusout", function(event){
+        let deck = document.getElementsByClassName("deck")[0];
+        let deck_name = deck.querySelector(".name")
+        deck_name.addEventListener("focusout", function(event){
             update_input_tag(event.currentTarget, "Deck", "name", deck.id);});
 
         let cards = document.getElementsByClassName("card");
         for(let card of cards){
-            console.log(card);
-            let front = card.querySelector(".front");
-            front.addEventListener("focusout", function(event){
+            let card_front = card.querySelector(".front");
+            card_front.addEventListener("focusout", function(event){
                 update_input_tag(event.currentTarget, "Card", "front", card.id)
             });
 
-            let back = card.querySelector(".back");
-            back.addEventListener("focusout", function(event){
+            let card_back = card.querySelector(".back");
+            card_back.addEventListener("focusout", function(event){
                 update_input_tag(event.currentTarget, "Card", "back", card.id)
             });
         }
