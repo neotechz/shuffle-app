@@ -14,14 +14,18 @@
         <input type = "text" placeholder = "{{ deck.name }}" value = "{{ deck.name }}" id = "{{ deck.id }}">
     </form>
 
-    <ul>
+    <ol>
     {% for card in cards %}
-
-    <li>{{ card.front }}</li>
-    <li>{{ card.back }}</li>
+    
+    <li>
+        <form>
+            <input type = "text" placeholder = "{{ card.front }}" value = "{{ card.front }}" id = "{{ card.id }}?front">
+            <input type = "text" placeholder = "{{ card.back }}" value = "{{ card.back }}" id = "{{ card.id }}?back">
+        </form>
+    </li>
 
     {% endfor %}
-    </ul>
+    </ol>
 
     <script>
         deck = document.getElementById("{{ deck.id }}");
