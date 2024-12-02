@@ -108,7 +108,7 @@ def index():
     return render_template("index.html", decks = decks)
 
 
-@app.route("/new", methods = ["GET"])
+@app.route("/deck/new", methods = ["GET"])
 def create_deck():
     deck = Deck(user_id = session.get("id"), datetime_now = get_datetime())
     session_db.add(deck)
