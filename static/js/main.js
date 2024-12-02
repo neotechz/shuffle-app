@@ -1,19 +1,20 @@
-let update_input = function(input, type){
-    fetch(`/${type}/rename`, {
+let update_input_tag = function(input, model, attr, id){
+    fetch("/action/update_input_tag", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            id: input.id,
-            name: input.value
-
+            model: model,
+            attr: attr,
+            value: input.value,
+            id: id
         })
     }).then(response => response.json())
     .then(data => {
         if(data["success"]){
-            input.value = data["name"]
-            input.placeholder = data["name"]
+            input.value = data["value"]
+            input.placeholder = data["value"]
         }
     });
 }

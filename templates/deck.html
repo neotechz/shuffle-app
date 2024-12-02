@@ -18,9 +18,9 @@
     {% for card in cards %}
     
     <li>
-        <form>
-            <input type = "text" placeholder = "{{ card.front }}" value = "{{ card.front }}" id = "{{ card.id }}?front">
-            <input type = "text" placeholder = "{{ card.back }}" value = "{{ card.back }}" id = "{{ card.id }}?back">
+        <form class = "card" id = "{{ card.id }}">
+            <input type = "text" placeholder = "{{ card.front }}" value = "{{ card.front }}" class = "front">
+            <input type = "text" placeholder = "{{ card.back }}" value = "{{ card.back }}" class = "back">
         </form>
     </li>
 
@@ -28,9 +28,23 @@
     </ol>
 
     <script>
-        deck = document.getElementById("{{ deck.id }}");
+        let deck = document.getElementById("{{ deck.id }}");
         deck.addEventListener("focusout", function(event){
-            update_input(event.currentTarget, "deck");})
+            update_input_tag(event.currentTarget, "Deck", "name", deck.id);});
+
+        let cards = document.getElementsByClassName("card");
+        for(let card of cards){
+            console.log(card);
+            let front = card.querySelector(".front");
+            front.addEventListener("focusout", function(event){
+                update_input_tag(event.currentTarget, "Card", "front", card.id)
+            });
+
+            let back = card.querySelector(".back");
+            back.addEventListener("focusout", function(event){
+                update_input_tag(event.currentTarget, "Card", "back", card.id)
+            });
+        }
     </script>
 
 {% endblock %}

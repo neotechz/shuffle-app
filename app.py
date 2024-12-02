@@ -133,19 +133,19 @@ def show_deck(deck_id):
     return render_template("deck.html", cards = cards, deck = deck)
 
 
-@app.route("/deck/rename", methods = ["POST"])
-def rename_deck():
+@app.route("/action/update_input_tag", methods = ["POST"])
+def update_input_tag():
     data = request.get_json()
-    deck_id = data.get("id")
-    deck_name = data.get("name")
+    id = data.get("id")
+    value = data.get("value")
+    attr = data.get("attr")
 
-    print(data)
-
-    deck = session_db.query(Deck).filter_by(id = deck_id).first()
-    deck.name = deck_name
+    model = model_map[data.get("model")]
+    element = session_db.query(model).filter_by(id = id).first()
+    setattr(element, attr, value)
     session_db.commit()
 
-    return jsonify({"success": True, "name": deck_name})
+    return jsonify({"success": True, "value": value})
 
 
 # APP LAUNCH & RELATED METHODS
@@ -172,6 +172,12 @@ def create_guest():
 
 if __name__ == "__main__":
     Base.metadata.create_all(bind = engine)
+    model_map = {
+        "User": User,
+        "Deck": Deck,
+        "Card": Card
+    }
+
     Session_db = sessionmaker(bind = engine)
     session_db = Session_db()
     load_cookie_signature()
