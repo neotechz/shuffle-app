@@ -12,7 +12,7 @@ from datetime import datetime
 import uuid, os
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder ="static")
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 app.config['SESSION_TYPE'] = 'filesystem'
 
@@ -87,7 +87,7 @@ class Card(Base):
 def get_datetime():
     return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-
+static_folder="static"
 @app.route("/setup")
 def setup():
     guest = session_db.query(User).filter_by(role = "guest").first()

@@ -4,6 +4,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="initial-scale=1, width=device-width">
+        <script src = "/static/js/main.js" defer> </script>
         <title>Shuffle: {% block title %}{% endblock %}</title>
     </head>
 
@@ -12,28 +13,6 @@
 
     {% endblock %}
     </body>
-
-    <script>
-        let update_deck = function(deck){
-            console.log(deck);
-            fetch("/deck/rename", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    id: deck.id,
-                    name: deck.value
-
-                })
-            }).then(response => response.json())
-            .then(data => {
-                if(data["success"]){
-                    deck.value = data["name"]
-                    deck.placeholder = data["name"]
-                }
-            });
-        }
-    </script>
+    
 
 </html>
