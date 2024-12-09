@@ -5,18 +5,24 @@
 {% endblock %}
 
 {% block main %}
-    <form action = "/deck/new" method="get">
-        <button type = "submit">Create new deck</button>
-    </form>
+    <button id="new_deck">Create new deck</button>
 
     {% for deck in decks %}
 
     <form action = "/deck/{{ deck.id }}" method = "post">
         <button type = "submit">View: {{ deck.name }}</button>
-        <input type = "hidden" name = "deck_id" value = "{{ deck.id }}">
-        <input type = "hidden" name = "deck_name" value = "{{ deck.name }}">
+        <input type = "hidden" name = "deck_id">
+        <input type = "hidden" name = "deck_name">
     </form>
 
     {% endfor %}
+
+    <script>
+        let new_deck = document.getElementById("new_deck");
+        new_deck.addEventListener("click", async function(event){
+            deck = await create_new_deck();
+            redirect("POST", `/deck/${deck.id}`);
+        })
+    </script>
 
 {% endblock %}

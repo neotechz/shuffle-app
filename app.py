@@ -108,27 +108,10 @@ def index():
     return render_template("index.html", decks = decks)
 
 
-@app.route("/deck/new", methods = ["GET"])
-def create_deck():
-    deck = Deck(user_id = session.get("id"), datetime_now = get_datetime())
-    session_db.add(deck)
-    session_db.flush()
-
-    card = Card(deck_id = deck.id)
-    session_db.add(card)
-    session_db.commit()
-
-    return render_template("new_deck.html", deck = deck)
-
-
 @app.route("/deck/<string:deck_id>", methods = ["POST"])
 def show_deck(deck_id):
     cards = session_db.query(Card).filter_by(deck_id = deck_id).all()
-    deck = {
-        "id": request.form["deck_id"],
-        "name": request.form["deck_name"]
-
-    } 
+    deck = session_db.query(Deck).filter_by(id = deck_id).first()
 
     return render_template("deck.html", cards = cards, deck = deck)
 
@@ -146,6 +129,19 @@ def update_input_tag():
     session_db.commit()
 
     return jsonify({"success": True, "value": value})
+
+
+@app.route("/action/create_new_deck", methods = ["POST"])
+def create_new_deck():
+    deck = Deck(user_id = session.get("id"), datetime_now = get_datetime())
+    session_db.add(deck)
+    session_db.flush()
+
+    card = Card(deck_id = deck.id)
+    session_db.add(card)
+    session_db.commit()
+
+    return jsonify({"success": True, "id": deck.id})
 
 
 # APP LAUNCH & RELATED METHODS
