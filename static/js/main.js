@@ -18,7 +18,25 @@ const update_input_tag = async function(input, model, attr, id){
         input.value = data["value"]
         input.placeholder = data["value"]
     };
-    
+}
+
+const sync_deck_name = async function(id){
+    const response = await fetch("/action/sync_deck_name", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            id: id
+        })
+    });
+
+    data = await response.json();
+
+    if(data["success"]){
+        document.title = `Shuffle: ${data["deck_name"]}`;
+    };
+
 }
 
 const create_new_deck = async function(){

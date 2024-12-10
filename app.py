@@ -131,6 +131,15 @@ def update_input_tag():
     return jsonify({"success": True, "value": value})
 
 
+@app.route("/action/sync_deck_name", methods = ["POST"])
+def sync_deck_name():
+    data = request.get_json()
+    id = data.get("id")
+
+    deck_name = session_db.query(Deck).filter_by(id = id).first().name
+    return jsonify({"success": True, "deck_name": deck_name})
+
+
 @app.route("/action/create_new_deck", methods = ["POST"])
 def create_new_deck():
     deck = Deck(user_id = session.get("id"), datetime_now = get_datetime())

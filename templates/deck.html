@@ -31,7 +31,8 @@
         const deck = document.getElementsByClassName("deck")[0];
         const deck_name = deck.querySelector(".name")
         deck_name.addEventListener("focusout", async function(event){
-            update_input_tag(event.currentTarget, "Deck", "name", deck.id);
+            await update_input_tag(event.currentTarget, "Deck", "name", deck.id);
+            sync_deck_name(deck.id);
         });
 
         const cards = document.getElementsByClassName("card");
