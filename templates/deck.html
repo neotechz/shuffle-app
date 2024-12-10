@@ -30,19 +30,19 @@
     <script>
         const deck = document.getElementsByClassName("deck")[0];
         const deck_name = deck.querySelector(".name")
-        deck_name.addEventListener("focusout", function(event){
+        deck_name.addEventListener("focusout", async function(event){
             update_input_tag(event.currentTarget, "Deck", "name", deck.id);
         });
 
         const cards = document.getElementsByClassName("card");
         for(let card of cards){
             const card_front = card.querySelector(".front");
-            card_front.addEventListener("focusout", function(event){
+            card_front.addEventListener("focusout", async function(event){
                 update_input_tag(event.currentTarget, "Card", "front", card.id)
             });
 
             const card_back = card.querySelector(".back");
-            card_back.addEventListener("focusout", function(event){
+            card_back.addEventListener("focusout", async function(event){
                 update_input_tag(event.currentTarget, "Card", "back", card.id)
             });
         }
