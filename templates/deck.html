@@ -28,19 +28,20 @@
     </ol>
 
     <script>
-        let deck = document.getElementsByClassName("deck")[0];
-        let deck_name = deck.querySelector(".name")
+        const deck = document.getElementsByClassName("deck")[0];
+        const deck_name = deck.querySelector(".name")
         deck_name.addEventListener("focusout", function(event){
-            update_input_tag(event.currentTarget, "Deck", "name", deck.id);});
+            update_input_tag(event.currentTarget, "Deck", "name", deck.id);
+        });
 
-        let cards = document.getElementsByClassName("card");
-        for(let card of cards){
-            let card_front = card.querySelector(".front");
+        const cards = document.getElementsByClassName("card");
+        for(const card of cards){
+            const card_front = card.querySelector(".front");
             card_front.addEventListener("focusout", function(event){
                 update_input_tag(event.currentTarget, "Card", "front", card.id)
             });
 
-            let card_back = card.querySelector(".back");
+            const card_back = card.querySelector(".back");
             card_back.addEventListener("focusout", function(event){
                 update_input_tag(event.currentTarget, "Card", "back", card.id)
             });

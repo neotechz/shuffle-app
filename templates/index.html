@@ -18,7 +18,7 @@
     {% endfor %}
 
     <script>
-        let new_deck = document.getElementById("new_deck");
+        const new_deck = document.getElementById("new_deck");
         new_deck.addEventListener("click", async function(event){
             deck = await create_new_deck();
             redirect("POST", `/deck/${deck.id}`);

@@ -1,5 +1,5 @@
-let update_input_tag = function(input, model, attr, id){
-    fetch("/action/update_input_tag", {
+const update_input_tag = async function(input, model, attr, id){
+    const response = await fetch("/action/update_input_tag", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -10,27 +10,30 @@ let update_input_tag = function(input, model, attr, id){
             value: input.value,
             id: id
         })
-    }).then(response => response.json())
-    .then(data => {
-        if(data["success"]){
-            input.value = data["value"]
-            input.placeholder = data["value"]
-        };
     });
+    
+    data = await response.json();
+    
+    if(data["success"]){
+        input.value = data["value"]
+        input.placeholder = data["value"]
+    };
+    
 }
 
-let create_new_deck = async function(){
-    return fetch("/action/create_new_deck", {
+const create_new_deck = async function(){
+    const response = await fetch("/action/create_new_deck", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         }
-    }).then(response => {
-        return response.json();
-    })
+    });
+    
+    data = await response.json();
+    return data;
 }
 
-let redirect = function(method, url){
+const redirect = function(method, url){
     form = document.createElement("form");
     form.method = method;
     form.action = url;
