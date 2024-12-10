@@ -12,7 +12,7 @@ const update_input_tag = async function(input, model, attr, id){
         })
     });
     
-    data = await response.json();
+    const data = await response.json();
     
     if(data["success"]){
         input.value = data["value"]
@@ -31,7 +31,7 @@ const sync_deck_name = async function(id){
         })
     });
 
-    data = await response.json();
+    const data = await response.json();
 
     if(data["success"]){
         document.title = `Shuffle: ${data["deck_name"]}`;
@@ -47,12 +47,12 @@ const create_new_deck = async function(){
         }
     });
     
-    data = await response.json();
+    const data = await response.json();
     return data;
 }
 
 const redirect = function(method, url){
-    form = document.createElement("form");
+    const form = document.createElement("form");
     form.method = method;
     form.action = url;
 
