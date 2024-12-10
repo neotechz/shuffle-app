@@ -35,7 +35,7 @@
         });
 
         const cards = document.getElementsByClassName("card");
-        for(const card of cards){
+        for(let card of cards){
             const card_front = card.querySelector(".front");
             card_front.addEventListener("focusout", function(event){
                 update_input_tag(event.currentTarget, "Card", "front", card.id)
