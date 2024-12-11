@@ -27,6 +27,8 @@
     {% endfor %}
     </ol>
 
+    <button id="new_card">Create new card</button>
+
     <script>
         const deck = document.getElementsByClassName("deck")[0];
         const deck_name = deck.querySelector(".name")
@@ -37,16 +39,22 @@
 
         const cards = document.getElementsByClassName("card");
         for(let card of cards){
-            const card_front = card.querySelector(".front");
+            let card_front = card.querySelector(".front");
             card_front.addEventListener("focusout", async function(event){
                 update_input_tag(event.currentTarget, "Card", "front", card.id)
             });
 
-            const card_back = card.querySelector(".back");
+            let card_back = card.querySelector(".back");
             card_back.addEventListener("focusout", async function(event){
                 update_input_tag(event.currentTarget, "Card", "back", card.id)
             });
         }
+
+        const new_card = document.getElementById("new_card");
+        new_card.addEventListener("click", async function(event){
+            let card = await create_new_card(deck.id)
+            redirect("POST", `/deck/${deck.id}`);
+        });
     </script>
 
 {% endblock %}
