@@ -51,6 +51,21 @@ const create_new_deck = async function(){
     return data;
 }
 
+const create_new_card = async function(deck_id){
+    const response = await fetch("/action/create_new_card", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            deck_id: deck_id
+        })
+    });
+    
+    const data = await response.json();
+    return data;
+}
+
 const redirect = function(method, url){
     const form = document.createElement("form");
     form.method = method;

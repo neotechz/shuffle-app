@@ -146,11 +146,18 @@ def create_new_deck():
     session_db.add(deck)
     session_db.flush()
 
-    card = Card(deck_id = deck.id)
+    return jsonify({"success": True, "id": deck.id})
+
+@app.route("/action/create_new_card", methods = ["POST"])
+def create_new_card():
+    data = request.get_json()
+    deck_id = data.get("deck_id")
+
+    card = Card(deck_id = deck_id)
     session_db.add(card)
     session_db.commit()
 
-    return jsonify({"success": True, "id": deck.id})
+    return jsonify({"success": True})
 
 
 # APP LAUNCH & RELATED METHODS
