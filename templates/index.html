@@ -8,7 +8,7 @@
 
     {% for deck in decks %}
 
-    <form action = "/deck/{{ deck.id }}" method = "post">
+    <form action = "/deck/{{ deck.id }}" method = "post" class = "deck" id = "{{ deck.id }}">
         <input type = "text" value = "{{ deck.name }}" placeholder = "{{ deck.name }}" disabled> 
         <button type = "submit">View</button>
         <button type = "button" class = "study">Study</button>
