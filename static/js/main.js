@@ -66,6 +66,22 @@ const create_new_card = async function(deck_id){
     return data;
 }
 
+const delete_card = async function(deck_id, id){
+    const response = await fetch("/action/delete_card", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            deck_id: deck_id,
+            id: id
+        })
+    });
+    
+    const data = await response.json();
+    return data;
+}
+
 const redirect = function(method, url){
     const form = document.createElement("form");
     form.method = method;

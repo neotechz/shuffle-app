@@ -16,6 +16,12 @@ for(let card of cards){
     card_back.addEventListener("focusout", async function(event){
         update_input_tag(event.currentTarget, "Card", "back", card.id)
     });
+
+    let card_delete = card.querySelector(".delete");
+    card_delete.addEventListener("click", async function(event){
+        await delete_card(deck.id, card.id);
+        redirect("POST", `/deck/${deck.id}`);
+    });
 };
 
 const new_card = document.getElementById("new_card");

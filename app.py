@@ -159,6 +159,19 @@ def create_new_card():
 
     return jsonify({"success": True})
 
+@app.route("/action/delete_card", methods = ["POST"])
+def delete_card():
+    data = request.get_json()
+    deck_id = data.get("deck_id")
+    id = data.get("id")
+
+    print(f"{deck_id} {id}")
+
+    session_db.query(Card).filter_by(deck_id = deck_id, id = id).delete()
+    session_db.commit()
+
+    return jsonify({"success": True})
+
 
 # APP LAUNCH & RELATED METHODS
 
