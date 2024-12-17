@@ -9,7 +9,9 @@
     {% for deck in decks %}
 
     <form action = "/deck/{{ deck.id }}" method = "post">
-        <button type = "submit">View: {{ deck.name }}</button>
+        <input type = "text" value = "{{ deck.name }}" placeholder = "{{ deck.name }}" disabled> 
+        <button type = "submit">View</button>
+        <button type = "button" class = "study">Study</button>
         <input type = "hidden" name = "deck_id">
         <input type = "hidden" name = "deck_name">
     </form>
