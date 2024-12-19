@@ -8,11 +8,14 @@
     {% for card in cards %}
         <form class = "card hidden">
             <input type = "hidden" value = "{{ card.front }}" class = "front">
+            <input type = "hidden" value = "{{ card.back }}" class = "back">
         </form>
     {% endfor %}
 
     <form id = "board">
         <input type = "text" class = "question" disabled>
+        <input type = "hidden" class = "answer" disabled>
+        <button type = "button" class = "reveal">Reveal</button>
     </form>
 
 {% endblock %}
