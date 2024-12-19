@@ -5,6 +5,14 @@
 
 {% block main %}
 
-    <p>studyin..</p>
+    {% for card in cards %}
+        <form class = "card hidden">
+            <input type = "hidden" value = "{{ card.front }}" class = "front">
+        </form>
+    {% endfor %}
+
+    <form id = "board">
+        <input type = "text" class = "question" disabled>
+    </form>
 
 {% endblock %}
