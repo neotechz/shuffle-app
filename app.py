@@ -34,9 +34,9 @@ class User(Base):
     username = Column("username", String)
     name = Column("name", String)
     num_decks = Column("num_decks", Integer, default = 0)
-    datetime_created = Column("datetime_created", Integer)
-    datetime_updated = Column("datetime_updated", Integer)
-    datetime_login = Column("datetime_login", Integer)
+    datetime_created = Column("datetime_created", String)
+    datetime_updated = Column("datetime_updated", String)
+    datetime_login = Column("datetime_login", String)
     hash = Column("hash", String, nullable = True)
     role = Column("role", String)
 
@@ -59,8 +59,8 @@ class Deck(Base):
     visibility = Column("visibility", String, default = "Public")
     tags = Column("tags", String, nullable = True)
     num_cards = Column("num_cards", Integer, default = 1)
-    datetime_created = Column("datetime_created", Integer)
-    datetime_updated = Column("datetime_updated", Integer)
+    datetime_created = Column("datetime_created", String)
+    datetime_updated = Column("datetime_updated", String)
 
     def __init__(self, user_id, datetime_now):
         self.user_id = user_id
@@ -78,6 +78,7 @@ class Card(Base):
     ease_factor = Column("ease_factor", Integer, default = 2.5)
     interval = Column("interval", Integer, default = 1)
     user_score = Column("user_score", Integer, default = 4)
+    datetime_studied = Column("datetime_studied", String)
 
     def __init__(self, deck_id):
         self.deck_id = deck_id
