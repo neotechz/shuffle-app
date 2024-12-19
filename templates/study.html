@@ -5,6 +5,10 @@
 
 {% block main %}
 
+    <form action = "/" method = "get">
+        <button type = "submit">Go back to Main Menu</button>
+    </form>
+
     {% for card in cards %}
         <form class = "card hidden">
             <input type = "hidden" value = "{{ card.front }}" class = "front">
@@ -16,6 +20,7 @@
         <input type = "text" class = "question" disabled>
         <input type = "hidden" class = "answer" disabled>
         <button type = "button" class = "reveal">Reveal</button>
+        <button type = "button" class = "next">Next</button>
     </form>
 
 {% endblock %}
