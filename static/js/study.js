@@ -5,7 +5,7 @@ const board_reveal = board.querySelector(".reveal");
 
 document.addEventListener("DOMContentLoaded", function(){
     const cards = document.getElementsByClassName("card hidden");
-    let index = Math.floor(Math.random() * cards.length);
+    let index = 0;
     
     board_question.value = cards[index].querySelector(".front").value;
     board_answer.value = cards[index].querySelector(".back").value;

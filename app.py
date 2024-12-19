@@ -9,7 +9,7 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 
 
 from datetime import datetime
-import uuid, os
+import uuid, os, random
 
 
 app = Flask(__name__, static_folder ="static")
@@ -120,6 +120,8 @@ def show_deck(deck_id):
 @app.route("/study/<string:deck_id>", methods = ["POST"])
 def study_deck(deck_id):
     cards = session_db.query(Card).filter_by(deck_id = deck_id).all()
+    random.shuffle(cards)
+
     deck = session_db.query(Deck).filter_by(id = deck_id).first()
 
     return render_template("study.html", cards = cards, deck = deck)
