@@ -5,6 +5,12 @@ for(let deck of decks){
         deck.action = `/deck/${deck.id}`;
         deck.submit()
     });
+
+    let deck_study = deck.querySelector(".study");
+    deck_study.addEventListener("click", function(){
+        deck.action = `/study/${deck.id}`;
+        deck.submit()
+    });
 }
 
 const new_deck = document.getElementById("new_deck");

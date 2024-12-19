@@ -116,6 +116,14 @@ def show_deck(deck_id):
     return render_template("deck.html", cards = cards, deck = deck)
 
 
+@app.route("/study/<string:deck_id>", methods = ["POST"])
+def study_deck(deck_id):
+    cards = session_db.query(Card).filter_by(deck_id = deck_id).all()
+    deck = session_db.query(Deck).filter_by(id = deck_id).first()
+
+    return render_template("study.html", cards = cards, deck = deck)
+
+
 @app.route("/action/update_input_tag", methods = ["POST"])
 def update_input_tag():
     data = request.get_json()
