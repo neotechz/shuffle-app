@@ -28,25 +28,26 @@ def generate_uuid():
     return str(uuid.uuid4())
 
 
+def get_datetime():
+    return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+
 class User(Base):
     __tablename__ = "user"
     id = Column("id", String, primary_key = True, default = generate_uuid)
     username = Column("username", String)
     name = Column("name", String)
     num_decks = Column("num_decks", Integer, default = 0)
-    datetime_created = Column("datetime_created", String)
-    datetime_updated = Column("datetime_updated", String)
-    datetime_login = Column("datetime_login", String)
+    datetime_created = Column("datetime_created", String, default = get_datetime)
+    datetime_updated = Column("datetime_updated", String, default = get_datetime)
+    datetime_login = Column("datetime_login", String, default = get_datetime)
     hash = Column("hash", String, nullable = True)
     role = Column("role", String)
 
-    def __init__(self, username, name, datetime_now, hash = None, role = "user"):
+    def __init__(self, username, name, hash = None, role = "user"):
         self.username = username
         self.name = name
         self.hash = hash
-        self.datetime_created = datetime_now
-        self.datetime_updated = datetime_now
-        self.datetime_login = datetime_now
         self.role = role
 
 
@@ -59,14 +60,11 @@ class Deck(Base):
     visibility = Column("visibility", String, default = "Public")
     tags = Column("tags", String, nullable = True)
     num_cards = Column("num_cards", Integer, default = 1)
-    datetime_created = Column("datetime_created", String)
-    datetime_updated = Column("datetime_updated", String)
+    datetime_created = Column("datetime_created", String, default = get_datetime)
+    datetime_updated = Column("datetime_updated", String, default = get_datetime)
 
-    def __init__(self, user_id, datetime_now):
+    def __init__(self, user_id):
         self.user_id = user_id
-        self.datetime_created = datetime_now
-        self.datetime_updated = datetime_now
-
 
 class Card(Base):
     __tablename__ = "card"
@@ -78,15 +76,12 @@ class Card(Base):
     ease_factor = Column("ease_factor", Integer, default = 2.5)
     interval = Column("interval", Integer, default = 1)
     user_score = Column("user_score", Integer, default = 4)
-    datetime_studied = Column("datetime_studied", String)
+    datetime_studied = Column("datetime_studied", String, default = get_datetime)
 
     def __init__(self, deck_id):
         self.deck_id = deck_id
 
 # ROUTES & RELATED METHODS
-
-def get_datetime():
-    return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 static_folder="static"
 @app.route("/setup")
@@ -153,7 +148,7 @@ def sync_deck_name():
 
 @app.route("/action/create_new_deck", methods = ["POST"])
 def create_new_deck():
-    deck = Deck(user_id = session.get("id"), datetime_now = get_datetime())
+    deck = Deck(user_id = session.get("id"))
     session_db.add(deck)
     session_db.flush()
 
@@ -220,7 +215,7 @@ def create_guest():
     guest = session_db.query(User).filter_by(role = "guest").first()
     
     if not guest:
-        guest = User(username = "guest", name = "Guest", role = "guest", datetime_now = get_datetime())
+        guest = User(username = "guest", name = "Guest", role = "guest")
         session_db.add(guest)
         session_db.commit()
 
