@@ -15,10 +15,7 @@ let index = 0;
 document.addEventListener("DOMContentLoaded", function(){
     board_question.value = cards[index].querySelector(".front").value;
     board_answer.value = cards[index].querySelector(".back").value;
-
-    if ((index >= cards.length - 1) || (user_score_value == -1)){
-        board_next.disabled = true;
-    }
+    board_next.disabled = true;
 });
 
 
@@ -31,14 +28,11 @@ board_reveal.addEventListener("click", function(){
 board_next.addEventListener("click", function(){
     index += 1;
 
-    if (index >= cards.length - 1){
-        board_next.disabled = true;
-    }
-
     board_question.value = cards[index].querySelector(".front").value;
     board_answer.value = cards[index].querySelector(".back").value;
     board_answer.type = "hidden";
     user_score.hidden = "true";
+    board_next.disabled = true;
 });
 
 
@@ -46,7 +40,7 @@ for (user_score_button of user_score_buttons){
     user_score_button.addEventListener("click", function(){
         user_score_value = Number(user_score_button.value)
 
-        if( index < cards.length - 1){
+        if(index < cards.length - 1){
             board_next.disabled = false;
         }
     });
