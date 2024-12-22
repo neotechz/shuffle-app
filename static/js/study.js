@@ -37,11 +37,13 @@ board_next.addEventListener("click", function(){
 
 
 for (user_score_button of user_score_buttons){
-    user_score_button.addEventListener("click", function(){
+    user_score_button.addEventListener("click", async function(){
         user_score_value = Number(user_score_button.value)
 
         if(index < cards.length - 1){
             board_next.disabled = false;
         }
+
+        await update_card("datetime_studied", null, cards[index].querySelector(".id").value)
     });
-};
+}; 

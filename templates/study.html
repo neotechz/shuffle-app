@@ -13,6 +13,7 @@
         <form class = "card hidden">
             <input type = "hidden" value = "{{ card.front }}" class = "front">
             <input type = "hidden" value = "{{ card.back }}" class = "back">
+            <input type = "hidden" value = "{{ card.id }}" class = "id">
         </form>
     {% endfor %}
 
@@ -24,7 +25,7 @@
         <div id = "user_score" hidden>
             <p>How well did you do?*</p>
             {% for i in range(0, 6) %}
-                <button type = "button" class = "user_score_{{ i }}" value = "{{ i }}"">{{ i }}</button>
+                <button type = "button" class = "user_score_{{ i }}" value = "{{ i }}">{{ i }}</button>
             {% endfor%}
             <br><br>
             <small>*0 (Failed to answer), 1 (Had great difficulty) to 5 (Answered immediately)</small>

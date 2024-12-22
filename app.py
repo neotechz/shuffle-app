@@ -159,6 +159,7 @@ def create_new_deck():
 
     return jsonify({"success": True, "id": deck.id})
 
+
 @app.route("/action/create_new_card", methods = ["POST"])
 def create_new_card():
     data = request.get_json()
@@ -170,6 +171,7 @@ def create_new_card():
 
     return jsonify({"success": True})
 
+
 @app.route("/action/delete_card", methods = ["POST"])
 def delete_card():
     data = request.get_json()
@@ -179,6 +181,23 @@ def delete_card():
     print(f"{deck_id} {id}")
 
     session_db.query(Card).filter_by(deck_id = deck_id, id = id).delete()
+    session_db.commit()
+
+    return jsonify({"success": True})
+
+
+@app.route("/action/update_card", methods = ["POST"])
+def update_card():
+    data = request.get_json()
+    attr = data.get("attr")
+    value = data.get("value") if attr != "datetime_studied" else get_datetime()
+    id = data.get("id")
+
+    print("HELLO")
+    print(id)
+
+    card = session_db.query(Card).filter_by(id = id).first()
+    setattr(card, attr, value)
     session_db.commit()
 
     return jsonify({"success": True})

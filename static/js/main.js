@@ -90,3 +90,19 @@ const redirect = function(method, url){
     document.body.appendChild(form);
     form.submit();
 }
+
+const update_card = async function(attr, value, id){
+    const response = await fetch("/action/update_card", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            attr: attr,
+            value: value,
+            id: id
+        })
+    });
+    
+    const data = await response.json();
+}
