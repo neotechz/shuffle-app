@@ -23,12 +23,9 @@
         <button type = "button" class = "next">Next</button>
         <div id = "user_score" hidden>
             <p>How well did you do?*</p>
-            <button type = "button" class = "zero">0</button>
-            <button type = "button" class = "one">1</button>
-            <button type = "button" class = "two">2</button>
-            <button type = "button" class = "three">3</button>
-            <button type = "button" class = "four">4</button>
-            <button type = "button" class = "five">5</button>
+            {% for i in range(0, 6) %}
+                <button type = "button" class = "user_score_{{ i }}" value = "{{ i }}"">{{ i }}</button>
+            {% endfor%}
             <br><br>
             <small>*0 (Failed to answer), 1 (Had great difficulty) to 5 (Answered immediately)</small>
         </div>
